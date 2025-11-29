@@ -237,6 +237,18 @@ See [FRONTEND_GUIDE.md](FRONTEND_GUIDE.md) for detailed features.
 11. **Voice Banking**: Biometric voice authentication
 12. **Autonomous AI Advisor**: Self-managing portfolios
 
+## Screeshots
+
+<img width="1781" height="1031" alt="image" src="https://github.com/user-attachments/assets/1408d952-874d-49a8-8fa3-738329d6e18d" />
+<img width="1849" height="812" alt="image" src="https://github.com/user-attachments/assets/0e850e44-201f-47c5-8824-f9d7e276e6a3" />
+<img width="1738" height="548" alt="image" src="https://github.com/user-attachments/assets/55d5eb1b-9b9b-4227-badf-5656d6833eeb" />
+<img width="1795" height="688" alt="image" src="https://github.com/user-attachments/assets/6499a037-dbb3-421f-ad28-0d850928d34f" />
+<img width="1846" height="597" alt="image" src="https://github.com/user-attachments/assets/2320e19f-9b6d-471b-b5a5-b96343b02434" />
+<img width="1812" height="619" alt="image" src="https://github.com/user-attachments/assets/17fe523f-eefc-4506-977d-d1fefca51b88" />
+<img width="1813" height="698" alt="image" src="https://github.com/user-attachments/assets/4333c169-3ed5-4b95-b840-676ff1c9a670" />
+<img width="1792" height="701" alt="image" src="https://github.com/user-attachments/assets/f794eddc-d20a-476d-8741-4bce99add139" />
+<img width="1849" height="1045" alt="image" src="https://github.com/user-attachments/assets/3600af01-352f-42e4-b05b-bba3213f50b4" />
+
 ## 📄 License
 
 Proprietary - All rights reserved
