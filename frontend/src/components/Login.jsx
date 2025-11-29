@@ -19,12 +19,12 @@ export default function Login({ onSwitch }) {
     setError('')
     
     if (!validateEmail(email)) {
-      setError('Email inválido')
+      setError('Invalid email')
       return
     }
     
     if (password.length < 6) {
-      setError('Senha deve ter pelo menos 6 caracteres')
+      setError('Password must be at least 6 characters')
       return
     }
     
@@ -39,7 +39,7 @@ export default function Login({ onSwitch }) {
       }
     } catch (error) {
       console.error('Login error:', error)
-      setError(error.message || 'Erro ao fazer login')
+      setError(error.message || 'Login error')
     } finally {
       setLoading(false)
       setGlobalLoading(false)
@@ -110,7 +110,7 @@ export default function Login({ onSwitch }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Bem-vindo de volta
+              Welcome back
             </motion.h1>
             <motion.p 
               className="text-sm sm:text-base text-gray-400 flex items-center justify-center gap-2"
@@ -155,7 +155,7 @@ export default function Login({ onSwitch }) {
                       ? 'border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20' 
                       : 'border-gray-700 hover:border-gray-600'
                   }`}
-                  placeholder="seu@email.com"
+                  placeholder="your@email.com"
                   required
                   animate={{
                     scale: focusedField === 'email' ? 1.02 : 1
@@ -170,7 +170,7 @@ export default function Login({ onSwitch }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <label className="block text-sm mb-2 font-medium">Senha</label>
+              <label className="block text-sm mb-2 font-medium">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                 <motion.input
@@ -232,7 +232,7 @@ export default function Login({ onSwitch }) {
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                       className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                     />
-                    Entrando...
+                    Signing in...
                   </motion.div>
                 ) : (
                   <motion.div
@@ -242,7 +242,7 @@ export default function Login({ onSwitch }) {
                     exit={{ opacity: 0 }}
                     className="flex items-center gap-2"
                   >
-                    Entrar
+                    Sign In
                     <ArrowRight className="w-5 h-5" />
                   </motion.div>
                 )}
@@ -263,7 +263,7 @@ export default function Login({ onSwitch }) {
               whileTap={{ scale: 0.98 }}
             >
               <Zap className="w-4 h-4 text-yellow-400" />
-              Demo Rápido (admin@baas.com)
+              Quick Demo (admin@baas.com)
             </motion.button>
           </motion.div>
 
@@ -273,14 +273,14 @@ export default function Login({ onSwitch }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
           >
-            Não tem conta?{' '}
+            Don't have an account?{' '}
             <motion.button 
               onClick={onSwitch} 
               className="text-primary hover:underline font-medium touch-manipulation"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Criar conta
+              Create account
             </motion.button>
           </motion.p>
         </div>

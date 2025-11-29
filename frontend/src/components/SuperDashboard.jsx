@@ -5,11 +5,18 @@ import {
   ArrowUpRight, ArrowDownLeft, Sparkles, Bell, Settings, Search, Filter, MoreVertical, 
   Copy, Check, Smartphone, QrCode, Globe, PiggyBank, Target, Award, Users, MessageCircle,
   Camera, Mic, Bot, Star, Gift, Gamepad2, ShoppingBag, Car, Home, Plane, Coffee,
-  TrendingDown, Calendar, Clock, MapPin, Headphones, Video, FileText, Download
+  TrendingDown, Calendar, Clock, MapPin, Headphones, Video, FileText, Download, X, User
 } from 'lucide-react'
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts'
 import { useStore } from '../store/useStore'
 import { formatCurrency, formatDate } from '../utils/formatters'
+import CryptoWidget from './CryptoWidget'
+import SocialFeed from './SocialFeed'
+import MarketplaceWidget from './MarketplaceWidget'
+import PIXModal from './PIXModal'
+import InvestmentModal from './InvestmentModal'
+import GoalsModal from './GoalsModal'
+import BillPaymentModal from './BillPaymentModal'
 
 export default function SuperDashboard() {
   const { user, accounts, cards, transactions, totalBalance, logout } = useStore()
@@ -17,40 +24,49 @@ export default function SuperDashboard() {
   const [showBalance, setShowBalance] = useState(true)
   const [aiChat, setAiChat] = useState(false)
   const [voiceMode, setVoiceMode] = useState(false)
+  const [showVoiceAssistant, setShowVoiceAssistant] = useState(false)
+  const [notifications, setNotifications] = useState(3)
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
+  const [showPIXModal, setShowPIXModal] = useState(false)
+  const [showInvestmentModal, setShowInvestmentModal] = useState(false)
+  const [showGoalsModal, setShowGoalsModal] = useState(false)
+  const [showBillModal, setShowBillModal] = useState(false)
+  const [billType, setBillType] = useState('electricity')
 
   const sections = [
-    { id: 'home', icon: Wallet, label: 'Início' },
-    { id: 'payments', icon: Send, label: 'Pagamentos' },
-    { id: 'investments', icon: TrendingUp, label: 'Investimentos' },
-    { id: 'cards', icon: CreditCard, label: 'Cartões' },
+    { id: 'home', icon: Wallet, label: 'Home' },
+    { id: 'payments', icon: Send, label: 'Payments' },
+    { id: 'investments', icon: TrendingUp, label: 'Investments' },
+    { id: 'cards', icon: CreditCard, label: 'Cards' },
     { id: 'rewards', icon: Gift, label: 'Rewards' },
-    { id: 'ai', icon: Bot, label: 'IA Assistant' },
+    { id: 'ai', icon: Bot, label: 'AI Assistant' },
     { id: 'marketplace', icon: ShoppingBag, label: 'Shopping' },
     { id: 'social', icon: Users, label: 'Social' }
   ]
 
   const quickActions = [
-    { icon: QrCode, label: 'PIX QR', color: 'bg-green-600', action: () => {} },
-    { icon: Smartphone, label: 'Recarga', color: 'bg-blue-600', action: () => {} },
-    { icon: Car, label: 'Uber', color: 'bg-black', action: () => {} },
-    { icon: Coffee, label: 'iFood', color: 'bg-red-600', action: () => {} },
-    { icon: Home, label: 'Conta Luz', color: 'bg-yellow-600', action: () => {} },
-    { icon: Plane, label: 'Viagens', color: 'bg-purple-600', action: () => {} },
-    { icon: Gamepad2, label: 'Games', color: 'bg-indigo-600', action: () => {} },
-    { icon: Target, label: 'Metas', color: 'bg-pink-600', action: () => {} }
+    { icon: QrCode, label: 'QR Pay', color: 'bg-green-600', action: () => setShowPIXModal(true) },
+    { icon: Smartphone, label: 'Top Up', color: 'bg-blue-600', action: () => alert('Mobile top-up - Coming soon!') },
+    { icon: Car, label: 'Uber', color: 'bg-black', action: () => alert('Redirecting to Uber...') },
+    { icon: Coffee, label: 'Food', color: 'bg-red-600', action: () => alert('Opening food delivery!') },
+    { icon: Home, label: 'Bills', color: 'bg-yellow-600', action: () => { setBillType('electricity'); setShowBillModal(true) } },
+    { icon: Plane, label: 'Travel', color: 'bg-purple-600', action: () => alert('Travel deals loading...') },
+    { icon: Gamepad2, label: 'Games', color: 'bg-indigo-600', action: () => alert('Game store - Coming soon!') },
+    { icon: Target, label: 'Goals', color: 'bg-pink-600', action: () => setShowGoalsModal(true) }
   ]
 
   const investments = [
-    { name: 'CDB Premium', value: 15420, change: 2.3, risk: 'Baixo' },
-    { name: 'Tesouro Direto', value: 8750, change: 1.8, risk: 'Baixo' },
-    { name: 'Ações PETR4', value: 3200, change: -0.5, risk: 'Alto' },
-    { name: 'Bitcoin', value: 1800, change: 5.2, risk: 'Alto' }
+    { name: 'Premium CDB', value: 15420, change: 2.3, risk: 'Low' },
+    { name: 'Treasury Direct', value: 8750, change: 1.8, risk: 'Low' },
+    { name: 'PETR4 Stocks', value: 3200, change: -0.5, risk: 'High' },
+    { name: 'Bitcoin', value: 1800, change: 5.2, risk: 'High' }
   ]
 
   const rewards = [
-    { title: 'Cashback 5%', desc: 'Em supermercados', points: 250 },
-    { title: 'Milhas 2x', desc: 'Em viagens', points: 500 },
-    { title: 'Desconto 20%', desc: 'Em restaurantes', points: 100 }
+    { title: '5% Cashback', desc: 'On groceries', points: 250 },
+    { title: '2x Miles', desc: 'On travel', points: 500 },
+    { title: '20% Discount', desc: 'On restaurants', points: 100 }
   ]
 
   const renderHomeSection = () => (
@@ -65,7 +81,7 @@ export default function SuperDashboard() {
         <div className="relative z-10">
           <div className="flex justify-between items-start mb-4">
             <div>
-              <p className="text-white/80 text-sm">Saldo Total</p>
+              <p className="text-white/80 text-sm">Total Balance</p>
               <div className="flex items-center gap-3">
                 <h2 className="text-3xl font-bold">
                   {showBalance ? formatCurrency(totalBalance()) : '••••••'}
@@ -76,17 +92,28 @@ export default function SuperDashboard() {
               </div>
             </div>
             <div className="flex gap-2">
-              <button className="p-2 bg-white/20 rounded-xl">
+              <button 
+                onClick={() => setShowNotifications(true)}
+                className="p-2 bg-white/20 rounded-xl relative"
+              >
                 <Bell className="w-5 h-5" />
+                {notifications > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                    {notifications}
+                  </span>
+                )}
               </button>
-              <button className="p-2 bg-white/20 rounded-xl">
+              <button 
+                onClick={() => setShowSettings(true)}
+                className="p-2 bg-white/20 rounded-xl"
+              >
                 <Settings className="w-5 h-5" />
               </button>
             </div>
           </div>
           <div className="flex items-center gap-2 text-green-300">
             <ArrowUpRight className="w-4 h-4" />
-            <span className="text-sm">+12.5% este mês</span>
+            <span className="text-sm">+12.5% this month</span>
           </div>
         </div>
       </motion.div>
@@ -95,7 +122,7 @@ export default function SuperDashboard() {
       <div>
         <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
           <Zap className="w-5 h-5 text-yellow-400" />
-          Ações Rápidas
+          Quick Actions
         </h3>
         <div className="grid grid-cols-4 gap-3">
           {quickActions.map((action, index) => (
@@ -103,6 +130,7 @@ export default function SuperDashboard() {
               key={index}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={action.action}
               className={`${action.color} rounded-2xl p-4 flex flex-col items-center gap-2 text-white`}
             >
               <action.icon className="w-6 h-6" />
@@ -122,16 +150,16 @@ export default function SuperDashboard() {
             <Brain className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="font-bold">IA Insights</h3>
-            <p className="text-xs text-gray-400">Análise personalizada</p>
+            <h3 className="font-bold">AI Insights</h3>
+            <p className="text-xs text-gray-400">Personalized analysis</p>
           </div>
         </div>
         <div className="space-y-3">
           <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-3">
-            <p className="text-sm text-green-400">💡 Você economizou 15% este mês! Continue assim.</p>
+            <p className="text-sm text-green-400">💡 You saved 15% this month! Keep it up.</p>
           </div>
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3">
-            <p className="text-sm text-blue-400">📊 Melhor momento para investir em CDB: taxa 13.2%</p>
+            <p className="text-sm text-blue-400">📊 Best time to invest in CDB: 13.2% rate</p>
           </div>
         </div>
       </motion.div>
@@ -141,9 +169,12 @@ export default function SuperDashboard() {
   const renderInvestmentsSection = () => (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Investimentos</h2>
-        <button className="bg-primary rounded-xl px-4 py-2 text-sm font-semibold">
-          + Investir
+        <h2 className="text-2xl font-bold">Investments</h2>
+        <button 
+          onClick={() => setShowInvestmentModal(true)}
+          className="bg-primary rounded-xl px-4 py-2 text-sm font-semibold"
+        >
+          + Invest
         </button>
       </div>
 
@@ -159,7 +190,7 @@ export default function SuperDashboard() {
             <div className="flex justify-between items-start mb-3">
               <div>
                 <h3 className="font-semibold">{investment.name}</h3>
-                <p className="text-xs text-gray-400">Risco {investment.risk}</p>
+                <p className="text-xs text-gray-400">{investment.risk} Risk</p>
               </div>
               <span className={`text-xs px-2 py-1 rounded-full ${
                 investment.change > 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
@@ -173,14 +204,14 @@ export default function SuperDashboard() {
       </div>
 
       <div className="glass rounded-2xl p-6">
-        <h3 className="font-bold mb-4">Performance dos Investimentos</h3>
+        <h3 className="font-bold mb-4">Investment Performance</h3>
         <ResponsiveContainer width="100%" height={200}>
           <LineChart data={[
             { name: 'Jan', value: 25000 },
-            { name: 'Fev', value: 26500 },
+            { name: 'Feb', value: 26500 },
             { name: 'Mar', value: 28200 },
-            { name: 'Abr', value: 27800 },
-            { name: 'Mai', value: 29170 }
+            { name: 'Apr', value: 27800 },
+            { name: 'May', value: 29170 }
           ]}>
             <XAxis dataKey="name" stroke="#64748b" />
             <YAxis stroke="#64748b" />
@@ -198,7 +229,7 @@ export default function SuperDashboard() {
         <h2 className="text-2xl font-bold">Rewards</h2>
         <div className="flex items-center gap-2">
           <Star className="w-5 h-5 text-yellow-400" />
-          <span className="font-bold">1,250 pontos</span>
+          <span className="font-bold">1,250 points</span>
         </div>
       </div>
 
@@ -220,19 +251,24 @@ export default function SuperDashboard() {
             </div>
             <div className="text-right">
               <p className="font-bold text-yellow-400">{reward.points} pts</p>
-              <button className="text-xs text-primary hover:underline">Resgatar</button>
+              <button 
+                onClick={() => alert(`Redeeming ${reward.points} points...`)}
+                className="text-xs text-primary hover:underline"
+              >
+                Redeem
+              </button>
             </div>
           </motion.div>
         ))}
       </div>
 
       <div className="glass rounded-2xl p-6">
-        <h3 className="font-bold mb-4">Programa de Fidelidade</h3>
+        <h3 className="font-bold mb-4">Loyalty Program</h3>
         <div className="space-y-4">
           <div>
             <div className="flex justify-between text-sm mb-2">
-              <span>Nível Atual: Gold</span>
-              <span>750/1000 pts para Platinum</span>
+              <span>Current Level: Gold</span>
+              <span>750/1000 pts to Platinum</span>
             </div>
             <div className="w-full bg-gray-700 rounded-full h-2">
               <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 h-2 rounded-full" style={{width: '75%'}} />
@@ -245,11 +281,11 @@ export default function SuperDashboard() {
             </div>
             <div>
               <p className="text-2xl font-bold text-blue-400">2x</p>
-              <p className="text-xs text-gray-400">Milhas</p>
+              <p className="text-xs text-gray-400">Miles</p>
             </div>
             <div>
               <p className="text-2xl font-bold text-green-400">0%</p>
-              <p className="text-xs text-gray-400">Anuidade</p>
+              <p className="text-xs text-gray-400">Annual Fee</p>
             </div>
           </div>
         </div>
@@ -262,7 +298,7 @@ export default function SuperDashboard() {
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold flex items-center gap-2">
           <Bot className="w-6 h-6 text-purple-400" />
-          IA Assistant
+          AI Assistant
         </h2>
         <div className="flex gap-2">
           <button 
@@ -284,13 +320,13 @@ export default function SuperDashboard() {
               <Bot className="w-4 h-4 text-white" />
             </div>
             <div className="bg-gray-700 rounded-2xl px-4 py-2 max-w-xs">
-              <p className="text-sm">Olá! Como posso ajudar você hoje? Posso analisar seus gastos, sugerir investimentos ou responder dúvidas financeiras.</p>
+              <p className="text-sm">Hello! How can I help you today? I can analyze your spending, suggest investments, or answer financial questions.</p>
             </div>
           </div>
           
           <div className="flex gap-3 justify-end">
             <div className="bg-primary rounded-2xl px-4 py-2 max-w-xs">
-              <p className="text-sm">Analise meus gastos do mês</p>
+              <p className="text-sm">Analyze my monthly spending</p>
             </div>
             <div className="p-2 bg-gray-600 rounded-xl">
               <User className="w-4 h-4" />
@@ -302,12 +338,12 @@ export default function SuperDashboard() {
               <Bot className="w-4 h-4 text-white" />
             </div>
             <div className="bg-gray-700 rounded-2xl px-4 py-2 max-w-xs">
-              <p className="text-sm">📊 Análise completa:</p>
+              <p className="text-sm">📊 Complete analysis:</p>
               <ul className="text-xs mt-2 space-y-1">
-                <li>• Gastos: $3,210 (-2.1% vs mês anterior)</li>
-                <li>• Maior categoria: Alimentação (37%)</li>
-                <li>• Economia: $2,210 (meta: $3,000)</li>
-                <li>• Sugestão: Reduza 10% em delivery</li>
+                <li>• Expenses: $3,210 (-2.1% vs last month)</li>
+                <li>• Top category: Food (37%)</li>
+                <li>• Savings: $2,210 (goal: $3,000)</li>
+                <li>• Suggestion: Reduce 10% on delivery</li>
               </ul>
             </div>
           </div>
@@ -316,23 +352,32 @@ export default function SuperDashboard() {
         <div className="flex gap-2 mt-4">
           <input 
             type="text" 
-            placeholder="Digite sua pergunta..."
+            placeholder="Type your question..."
             className="flex-1 bg-dark-light border border-gray-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-primary"
           />
-          <button className="bg-primary rounded-xl px-4 py-2">
+          <button 
+            onClick={() => alert('Message sent to AI!')}
+            className="bg-primary rounded-xl px-4 py-2"
+          >
             <Send className="w-4 h-4" />
           </button>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <button className="glass rounded-2xl p-4 text-left hover:bg-white/5 transition">
-          <h3 className="font-semibold mb-1">Análise de Gastos</h3>
-          <p className="text-xs text-gray-400">Relatório detalhado mensal</p>
+        <button 
+          onClick={() => alert('Generating expense report...')}
+          className="glass rounded-2xl p-4 text-left hover:bg-white/5 transition"
+        >
+          <h3 className="font-semibold mb-1">Expense Analysis</h3>
+          <p className="text-xs text-gray-400">Detailed monthly report</p>
         </button>
-        <button className="glass rounded-2xl p-4 text-left hover:bg-white/5 transition">
-          <h3 className="font-semibold mb-1">Planejamento</h3>
-          <p className="text-xs text-gray-400">Metas e orçamento inteligente</p>
+        <button 
+          onClick={() => alert('Opening financial planner...')}
+          className="glass rounded-2xl p-4 text-left hover:bg-white/5 transition"
+        >
+          <h3 className="font-semibold mb-1">Planning</h3>
+          <p className="text-xs text-gray-400">Smart goals & budget</p>
         </button>
       </div>
     </div>
@@ -344,6 +389,8 @@ export default function SuperDashboard() {
       case 'investments': return renderInvestmentsSection()
       case 'rewards': return renderRewardsSection()
       case 'ai': return renderAISection()
+      case 'social': return <SocialFeed />
+      case 'marketplace': return <MarketplaceWidget />
       default: return renderHomeSection()
     }
   }
@@ -382,7 +429,7 @@ export default function SuperDashboard() {
             className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-500/20 text-red-400 transition"
           >
             <LogOut className="w-5 h-5" />
-            <span className="hidden lg:block">Sair</span>
+            <span className="hidden lg:block">Logout</span>
           </button>
         </div>
       </div>
@@ -408,11 +455,90 @@ export default function SuperDashboard() {
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setAiChat(!aiChat)}
+        onClick={() => setShowVoiceAssistant(true)}
         className="fixed bottom-6 right-6 p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg z-50"
       >
         <MessageCircle className="w-6 h-6 text-white" />
       </motion.button>
+
+      {/* Modals */}
+      {showNotifications && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowNotifications(false)}>
+          <div className="glass rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-xl font-bold mb-4">Notifications</h3>
+            <div className="space-y-3">
+              <div className="bg-dark-light rounded-lg p-3">
+                <p className="font-semibold text-sm">Cashback received!</p>
+                <p className="text-xs text-gray-400">You earned $25 in cashback</p>
+              </div>
+              <div className="bg-dark-light rounded-lg p-3">
+                <p className="font-semibold text-sm">Goal achieved</p>
+                <p className="text-xs text-gray-400">Congratulations! Savings goal completed</p>
+              </div>
+            </div>
+            <button onClick={() => setShowNotifications(false)} className="w-full mt-4 bg-primary rounded-lg py-2">
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showSettings && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowSettings(false)}>
+          <div className="glass rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-xl font-bold mb-4">Settings</h3>
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span>Push Notifications</span>
+                <button className="bg-primary rounded-full w-12 h-6 flex items-center px-1">
+                  <div className="bg-white w-4 h-4 rounded-full ml-auto"></div>
+                </button>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Dark Mode</span>
+                <button className="bg-primary rounded-full w-12 h-6 flex items-center px-1">
+                  <div className="bg-white w-4 h-4 rounded-full ml-auto"></div>
+                </button>
+              </div>
+            </div>
+            <button onClick={() => setShowSettings(false)} className="w-full mt-4 bg-primary rounded-lg py-2">
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showVoiceAssistant && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowVoiceAssistant(false)}>
+          <div className="glass rounded-2xl p-6 max-w-md w-full text-center" onClick={(e) => e.stopPropagation()}>
+            <div className="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Mic className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-xl font-bold mb-2">Voice Assistant</h3>
+            <p className="text-gray-400 mb-6">Say "Hello" to start</p>
+            <div className="flex gap-4 justify-center">
+              <button 
+                onClick={() => alert('Starting recording...')}
+                className="bg-red-500 rounded-full p-4"
+              >
+                <Mic className="w-6 h-6 text-white" />
+              </button>
+              <button 
+                onClick={() => setShowVoiceAssistant(false)}
+                className="bg-gray-700 rounded-full p-4"
+              >
+                <X className="w-6 h-6 text-white" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Advanced Modals */}
+      <PIXModal isOpen={showPIXModal} onClose={() => setShowPIXModal(false)} />
+      <InvestmentModal isOpen={showInvestmentModal} onClose={() => setShowInvestmentModal(false)} />
+      <GoalsModal isOpen={showGoalsModal} onClose={() => setShowGoalsModal(false)} />
+      <BillPaymentModal isOpen={showBillModal} onClose={() => setShowBillModal(false)} billType={billType} />
     </div>
   )
 }

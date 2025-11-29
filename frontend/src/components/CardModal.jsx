@@ -42,7 +42,7 @@ export default function CardModal({ isOpen, onClose }) {
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold flex items-center gap-2">
               <CreditCard className="w-5 h-5 text-purple-400" />
-              Meus Cartões
+              My Cards
             </h3>
             <button
               onClick={onClose}
@@ -65,7 +65,7 @@ export default function CardModal({ isOpen, onClose }) {
                   <div className="flex items-center gap-2">
                     <CreditCard className="w-5 h-5 text-purple-400" />
                     <span className="font-semibold">
-                      {card.type === 'virtual' ? 'Cartão Virtual' : 'Cartão Físico'}
+                      {card.type === 'virtual' ? 'Virtual Card' : 'Physical Card'}
                     </span>
                   </div>
                   <button
@@ -81,7 +81,7 @@ export default function CardModal({ isOpen, onClose }) {
 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-400">Número</span>
+                    <span className="text-sm text-gray-400">Number</span>
                     <div className="flex items-center gap-2">
                       <span className="font-mono">
                         {showDetails[card.id] ? card.number : '**** **** **** ' + (card.number?.slice(-4) || '1234')}
@@ -107,11 +107,11 @@ export default function CardModal({ isOpen, onClose }) {
                         <span className="font-mono">{card.cvv || '123'}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-400">Validade</span>
+                        <span className="text-sm text-gray-400">Expiry</span>
                         <span className="font-mono">{card.expiryDate || '12/28'}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-gray-400">Limite</span>
+                        <span className="text-sm text-gray-400">Limit</span>
                         <span className="font-semibold text-green-400">
                           ${(card.limit || 5000).toLocaleString()}
                         </span>
@@ -122,18 +122,18 @@ export default function CardModal({ isOpen, onClose }) {
 
                 <div className="flex gap-2 mt-4">
                   <button className="flex-1 bg-purple-600 hover:bg-purple-700 rounded-lg py-2 text-sm font-semibold transition">
-                    Bloquear
+                    Block
                   </button>
                   <button className="flex-1 bg-gray-700 hover:bg-gray-600 rounded-lg py-2 text-sm font-semibold transition">
-                    Configurar
+                    Settings
                   </button>
                 </div>
               </motion.div>
             )) : (
               <div className="text-center py-8">
                 <CreditCard className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-400 mb-4">Nenhum cartão encontrado</p>
-                <p className="text-sm text-gray-500">Crie um cartão nas ações rápidas</p>
+                <p className="text-gray-400 mb-4">No cards found</p>
+                <p className="text-sm text-gray-500">Create a card in quick actions</p>
               </div>
             )}
           </div>
@@ -142,7 +142,7 @@ export default function CardModal({ isOpen, onClose }) {
             onClick={onClose}
             className="w-full mt-6 bg-primary hover:bg-indigo-600 rounded-lg py-2 font-semibold transition"
           >
-            Fechar
+            Close
           </button>
         </motion.div>
       </motion.div>

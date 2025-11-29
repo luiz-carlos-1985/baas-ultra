@@ -20,19 +20,19 @@ export default function TransferModal({ isOpen, onClose }) {
 
   const handleTransfer = async () => {
     if (!transferData.fromAccount || !transferData.amount || !transferData.toAccount) {
-      setError('Preencha todos os campos obrigatórios')
+      setError('Fill in all required fields')
       return
     }
     
     const amount = parseFloat(transferData.amount)
     if (amount <= 0) {
-      setError('Valor deve ser maior que zero')
+      setError('Amount must be greater than zero')
       return
     }
     
     const fromAccount = accounts.find(acc => acc.id == transferData.fromAccount)
     if (!fromAccount || fromAccount.balance < amount) {
-      setError('Saldo insuficiente')
+      setError('Insufficient balance')
       return
     }
     
@@ -40,10 +40,8 @@ export default function TransferModal({ isOpen, onClose }) {
     setError('')
     
     try {
-      // Simular delay da transferência
       await new Promise(resolve => setTimeout(resolve, 2000))
       
-      // Atualizar saldo da conta
       const updatedAccounts = accounts.map(acc => 
         acc.id == transferData.fromAccount 
           ? { ...acc, balance: acc.balance - amount }
@@ -51,11 +49,10 @@ export default function TransferModal({ isOpen, onClose }) {
       )
       setAccounts(updatedAccounts)
       
-      // Adicionar transação
       addTransaction({
         type: 'expense',
         amount: -amount,
-        description: `Transferência ${transferData.toAccount.toUpperCase()} - ${transferData.description || 'Sem descrição'}`,
+        description: `Transfer ${transferData.toAccount.toUpperCase()} - ${transferData.description || 'No description'}`,
         category: 'transfer'
       })
       
@@ -66,7 +63,7 @@ export default function TransferModal({ isOpen, onClose }) {
       }, 2000)
       
     } catch (error) {
-      setError('Erro ao processar transferência')
+      setError('Error processing transfer')
     } finally {
       setLoading(false)
     }
@@ -96,9 +93,9 @@ export default function TransferModal({ isOpen, onClose }) {
             className="glass rounded-2xl p-8 max-w-md w-full text-center"
           >
             <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">Transferência Realizada!</h3>
+            <h3 className="text-xl font-bold mb-2">Transfer Completed!</h3>
             <p className="text-gray-400 mb-4">
-              {formatCurrency(parseFloat(transferData.amount))} transferido com sucesso
+              {formatCurrency(parseFloat(transferData.amount))} transferred successfully
             </p>
             <div className="w-full bg-green-500/20 rounded-full h-1">
               <motion.div
@@ -133,7 +130,7 @@ export default function TransferModal({ isOpen, onClose }) {
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-bold flex items-center gap-2">
               <Send className="w-5 h-5 text-green-400" />
-              Transferir
+              Transfer
             </h3>
             <button
               onClick={onClose}
@@ -150,23 +147,23 @@ export default function TransferModal({ isOpen, onClose }) {
               className="space-y-4"
             >
               <div>
-                <label className="block text-sm mb-2 font-medium">De qual conta?</label>
+                <label className="block text-sm mb-2 font-medium">From which account?</label>
                 <select
                   value={transferData.fromAccount}
                   onChange={(e) => setTransferData({...transferData, fromAccount: e.target.value})}
                   className="w-full bg-dark-light border border-gray-700 rounded-xl p-3 focus:outline-none focus:border-primary transition"
                 >
-                  <option value="">Selecione uma conta</option>
+                  <option value="">Select an account</option>
                   {accounts.map(account => (
                     <option key={account.id} value={account.id}>
-                      {account.type === 'checking' ? 'Conta Corrente' : 'Poupança'} - ${account.balance?.toLocaleString() || '0'}
+                      {account.type === 'checking' ? 'Checking Account' : 'Savings'} - ${account.balance?.toLocaleString() || '0'}
                     </option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm mb-2 font-medium">Valor</label>
+                <label className="block text-sm mb-2 font-medium">Amount</label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">$</span>
                   <input
@@ -181,7 +178,7 @@ export default function TransferModal({ isOpen, onClose }) {
                 </div>
                 {transferData.fromAccount && (
                   <p className="text-xs text-gray-400 mt-1">
-                    Saldo disponível: {formatCurrency(accounts.find(acc => acc.id == transferData.fromAccount)?.balance || 0)}
+                    Available balance: {formatCurrency(accounts.find(acc => acc.id == transferData.fromAccount)?.balance || 0)}
                   </p>
                 )}
               </div>
@@ -191,7 +188,7 @@ export default function TransferModal({ isOpen, onClose }) {
                 disabled={!transferData.fromAccount || !transferData.amount}
                 className="w-full bg-primary hover:bg-indigo-600 disabled:opacity-50 rounded-xl py-3 font-semibold transition flex items-center justify-center gap-2"
               >
-                Continuar
+                Continue
                 <ArrowRight className="w-4 h-4" />
               </button>
             </motion.div>
@@ -204,7 +201,7 @@ export default function TransferModal({ isOpen, onClose }) {
               className="space-y-4"
             >
               <div>
-                <label className="block text-sm mb-2 font-medium">Para onde?</label>
+                <label className="block text-sm mb-2 font-medium">To where?</label>
                 <div className="space-y-2">
                   <button
                     onClick={() => setTransferData({...transferData, toAccount: 'pix'})}
@@ -217,7 +214,7 @@ export default function TransferModal({ isOpen, onClose }) {
                     <User className="w-5 h-5 text-primary" />
                     <div className="text-left">
                       <p className="font-semibold">PIX</p>
-                      <p className="text-xs text-gray-400">Transferência instantânea</p>
+                      <p className="text-xs text-gray-400">Instant transfer</p>
                     </div>
                   </button>
                   
@@ -232,7 +229,7 @@ export default function TransferModal({ isOpen, onClose }) {
                     <CreditCard className="w-5 h-5 text-green-400" />
                     <div className="text-left">
                       <p className="font-semibold">TED</p>
-                      <p className="text-xs text-gray-400">Transferência bancária</p>
+                      <p className="text-xs text-gray-400">Bank transfer</p>
                     </div>
                   </button>
                 </div>
@@ -241,27 +238,27 @@ export default function TransferModal({ isOpen, onClose }) {
               {transferData.toAccount && (
                 <div>
                   <label className="block text-sm mb-2 font-medium">
-                    {transferData.toAccount === 'pix' ? 'Chave PIX' : 'Dados bancários'}
+                    {transferData.toAccount === 'pix' ? 'PIX Key' : 'Bank details'}
                   </label>
                   <input
                     type="text"
                     value={transferData.recipientInfo}
                     onChange={(e) => setTransferData({...transferData, recipientInfo: e.target.value})}
                     className="w-full bg-dark-light border border-gray-700 rounded-xl p-3 focus:outline-none focus:border-primary transition"
-                    placeholder={transferData.toAccount === 'pix' ? 'email@exemplo.com ou CPF' : 'Banco, agência, conta'}
+                    placeholder={transferData.toAccount === 'pix' ? 'email@example.com or ID' : 'Bank, branch, account'}
                     required
                   />
                 </div>
               )}
 
               <div>
-                <label className="block text-sm mb-2 font-medium">Descrição (opcional)</label>
+                <label className="block text-sm mb-2 font-medium">Description (optional)</label>
                 <input
                   type="text"
                   value={transferData.description}
                   onChange={(e) => setTransferData({...transferData, description: e.target.value})}
                   className="w-full bg-dark-light border border-gray-700 rounded-xl p-3 focus:outline-none focus:border-primary transition"
-                  placeholder="Ex: Pagamento aluguel"
+                  placeholder="Ex: Rent payment"
                 />
               </div>
 
@@ -277,7 +274,7 @@ export default function TransferModal({ isOpen, onClose }) {
                   onClick={() => setStep(1)}
                   className="flex-1 bg-gray-700 hover:bg-gray-600 rounded-xl py-3 font-semibold transition"
                 >
-                  Voltar
+                  Back
                 </button>
                 <button
                   onClick={handleTransfer}
@@ -291,10 +288,10 @@ export default function TransferModal({ isOpen, onClose }) {
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                         className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
                       />
-                      Processando...
+                      Processing...
                     </>
                   ) : (
-                    'Transferir'
+                    'Transfer'
                   )}
                 </button>
               </div>

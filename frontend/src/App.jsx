@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from './store/useStore'
 import Login from './components/Login'
 import Register from './components/Register'
-import Dashboard from './components/Dashboard'
+import SuperDashboard from './components/SuperDashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 import { useToast } from './components/Toast'
 
@@ -15,7 +15,7 @@ export default function App() {
   if (user) {
     return (
       <ErrorBoundary>
-        <Dashboard />
+        <SuperDashboard />
       </ErrorBoundary>
     )
   }

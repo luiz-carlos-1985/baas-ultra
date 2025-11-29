@@ -34,7 +34,7 @@ export default function Dashboard() {
         }
       }
     } catch (error) {
-      console.error('Erro ao carregar dados:', error)
+      console.error('Error loading data:', error)
     }
   }
 
@@ -48,17 +48,17 @@ export default function Dashboard() {
       })
       if (data) {
         setAccounts([...accounts, data])
-        alert('Conta criada com sucesso!')
+        alert('Account created successfully!')
       }
     } catch (error) {
-      alert('Erro ao criar conta')
+      alert('Error creating account')
     }
     setLoading(false)
   }
 
   const handleCreateCard = async () => {
     if (accounts.length === 0) {
-      alert('Crie uma conta primeiro')
+      alert('Create an account first')
       return
     }
     setLoading(true)
@@ -70,33 +70,33 @@ export default function Dashboard() {
       })
       if (data) {
         setCards([...cards, data])
-        alert('Cartão criado com sucesso!')
+        alert('Card created successfully!')
       }
     } catch (error) {
-      alert('Erro ao criar cartão')
+      alert('Error creating card')
     }
     setLoading(false)
   }
 
   const mockChartData = [
     { name: 'Jan', income: 4000, expense: 2800, net: 1200 },
-    { name: 'Fev', income: 3500, expense: 2200, net: 1300 },
+    { name: 'Feb', income: 3500, expense: 2200, net: 1300 },
     { name: 'Mar', income: 5200, expense: 3100, net: 2100 },
-    { name: 'Abr', income: 4800, expense: 2900, net: 1900 },
-    { name: 'Mai', income: 6200, expense: 3400, net: 2800 },
+    { name: 'Apr', income: 4800, expense: 2900, net: 1900 },
+    { name: 'May', income: 6200, expense: 3400, net: 2800 },
     { name: 'Jun', income: 5800, expense: 3200, net: 2600 }
   ]
 
   const expenseData = [
-    { name: 'Alimentação', value: 1200, color: '#ef4444' },
-    { name: 'Transporte', value: 800, color: '#f97316' },
-    { name: 'Lazer', value: 600, color: '#eab308' },
-    { name: 'Outros', value: 400, color: '#6366f1' }
+    { name: 'Food', value: 1200, color: '#ef4444' },
+    { name: 'Transport', value: 800, color: '#f97316' },
+    { name: 'Entertainment', value: 600, color: '#eab308' },
+    { name: 'Others', value: 400, color: '#6366f1' }
   ]
 
   const recentTransactions = transactions.length > 0 ? transactions.slice(0, 5) : [
-    { id: 1, type: 'income', amount: 2500, description: 'Salário', date: '2024-01-15', category: 'work' },
-    { id: 2, type: 'expense', amount: -120, description: 'Supermercado', date: '2024-01-14', category: 'food' },
+    { id: 1, type: 'income', amount: 2500, description: 'Salary', date: '2024-01-15', category: 'work' },
+    { id: 2, type: 'expense', amount: -120, description: 'Supermarket', date: '2024-01-14', category: 'food' },
     { id: 3, type: 'expense', amount: -45, description: 'Uber', date: '2024-01-14', category: 'transport' },
     { id: 4, type: 'income', amount: 150, description: 'Freelance', date: '2024-01-13', category: 'work' },
     { id: 5, type: 'expense', amount: -80, description: 'Netflix', date: '2024-01-12', category: 'entertainment' }
@@ -119,7 +119,7 @@ export default function Dashboard() {
         >
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold truncate">Olá, {user?.name?.split(' ')[0] || 'User'} 👋</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold truncate">Hello, {user?.name?.split(' ')[0] || 'User'} 👋</h1>
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
@@ -161,7 +161,7 @@ export default function Dashboard() {
               className="glass rounded-xl px-4 sm:px-6 py-2.5 sm:py-3 flex items-center gap-2 hover:bg-red-500/20 transition text-sm sm:text-base"
             >
               <LogOut className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="hidden sm:inline">Sair</span>
+              <span className="hidden sm:inline">Logout</span>
             </motion.button>
           </div>
         </motion.div>
@@ -177,7 +177,7 @@ export default function Dashboard() {
           >
             <div className="flex justify-between items-start mb-3 md:mb-4">
               <div className="flex-1 min-w-0">
-                <p className="text-gray-400 text-xs sm:text-sm mb-1">Saldo Total</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Total Balance</p>
                 <div className="flex items-center gap-2 sm:gap-3">
                   <motion.h2 
                     className="text-xl sm:text-2xl md:text-3xl font-bold truncate"
@@ -211,7 +211,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-green-400 text-xs sm:text-sm">
                 <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span>+12.5% este mês</span>
+                <span>+12.5% this month</span>
               </div>
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             </div>
@@ -226,12 +226,12 @@ export default function Dashboard() {
           >
             <div className="flex justify-between items-start mb-3 md:mb-4">
               <div>
-                <p className="text-gray-400 text-xs sm:text-sm mb-1">Receita Mensal</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Monthly Income</p>
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-green-400">$5,420</h2>
               </div>
               <ArrowUpRight className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 text-green-400 flex-shrink-0" />
             </div>
-            <p className="text-xs sm:text-sm text-gray-400">+8.2% vs mês anterior</p>
+            <p className="text-xs sm:text-sm text-gray-400">+8.2% vs last month</p>
           </motion.div>
 
           <motion.div
@@ -243,12 +243,12 @@ export default function Dashboard() {
           >
             <div className="flex justify-between items-start mb-3 md:mb-4">
               <div>
-                <p className="text-gray-400 text-xs sm:text-sm mb-1">Gastos Mensais</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Monthly Expenses</p>
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-red-400">$3,210</h2>
               </div>
               <ArrowDownLeft className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 text-red-400 flex-shrink-0" />
             </div>
-            <p className="text-xs sm:text-sm text-gray-400">-2.1% vs mês anterior</p>
+            <p className="text-xs sm:text-sm text-gray-400">-2.1% vs last month</p>
           </motion.div>
 
           <motion.div
@@ -260,12 +260,12 @@ export default function Dashboard() {
           >
             <div className="flex justify-between items-start mb-3 md:mb-4">
               <div>
-                <p className="text-gray-400 text-xs sm:text-sm mb-1">Economia</p>
+                <p className="text-gray-400 text-xs sm:text-sm mb-1">Savings</p>
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-400">$2,210</h2>
               </div>
               <Shield className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 text-blue-400 flex-shrink-0" />
             </div>
-            <p className="text-xs sm:text-sm text-gray-400">Meta: $3,000</p>
+            <p className="text-xs sm:text-sm text-gray-400">Goal: $3,000</p>
           </motion.div>
         </div>
 
@@ -278,7 +278,7 @@ export default function Dashboard() {
         >
           <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 flex items-center gap-2">
             <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
-            Ações Rápidas
+            Quick Actions
           </h3>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
             <motion.button
@@ -289,7 +289,7 @@ export default function Dashboard() {
               className="bg-primary hover:bg-indigo-600 active:bg-indigo-700 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center gap-1.5 sm:gap-2 transition disabled:opacity-50 touch-manipulation"
             >
               <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-xs sm:text-sm font-semibold">Nova Conta</span>
+              <span className="text-xs sm:text-sm font-semibold">New Account</span>
             </motion.button>
 
             <motion.button
@@ -300,7 +300,7 @@ export default function Dashboard() {
               className="bg-purple-600 hover:bg-purple-700 active:bg-purple-800 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center gap-1.5 sm:gap-2 transition disabled:opacity-50 touch-manipulation"
             >
               <CreditCard className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-xs sm:text-sm font-semibold">Novo Cartão</span>
+              <span className="text-xs sm:text-sm font-semibold">New Card</span>
             </motion.button>
 
             <motion.button
@@ -310,7 +310,7 @@ export default function Dashboard() {
               className="bg-green-600 hover:bg-green-700 active:bg-green-800 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center gap-1.5 sm:gap-2 transition touch-manipulation"
             >
               <Send className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-xs sm:text-sm font-semibold">Transferir</span>
+              <span className="text-xs sm:text-sm font-semibold">Transfer</span>
             </motion.button>
 
             <motion.button
@@ -320,7 +320,7 @@ export default function Dashboard() {
               className="bg-orange-600 hover:bg-orange-700 active:bg-orange-800 rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center gap-1.5 sm:gap-2 transition touch-manipulation"
             >
               <CreditCard className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-xs sm:text-sm font-semibold">Ver Cartões</span>
+              <span className="text-xs sm:text-sm font-semibold">View Cards</span>
             </motion.button>
           </div>
         </motion.div>
@@ -336,16 +336,16 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-primary" />
-                Fluxo de Caixa
+                Cash Flow
               </h3>
               <div className="flex gap-2">
                 <div className="flex items-center gap-2 text-xs">
                   <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                  <span>Receita</span>
+                  <span>Income</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
                   <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                  <span>Gastos</span>
+                  <span>Expenses</span>
                 </div>
               </div>
             </div>
@@ -388,7 +388,7 @@ export default function Dashboard() {
           >
             <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
               <Brain className="w-5 h-5 text-purple-400" />
-              Gastos por Categoria
+              Expenses by Category
             </h3>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
@@ -439,13 +439,13 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2">
                 <Zap className="w-5 h-5 text-yellow-400" />
-                Transações Recentes
+                Recent Transactions
               </h3>
               <button 
-                onClick={() => alert('Visualizando todas as transações...')}
+                onClick={() => alert('Viewing all transactions...')}
                 className="text-primary hover:underline text-sm"
               >
-                Ver todas
+                View all
               </button>
             </div>
             <div className="space-y-3">
@@ -493,7 +493,7 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg sm:text-xl font-bold flex items-center gap-2">
                 <Wallet className="w-5 h-5 text-primary" />
-                Minhas Contas
+                My Accounts
               </h3>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -501,7 +501,7 @@ export default function Dashboard() {
                 onClick={handleCreateAccount}
                 className="bg-primary hover:bg-indigo-600 rounded-lg px-3 py-1.5 text-sm font-semibold transition"
               >
-                + Nova
+                + New
               </motion.button>
             </div>
             <div className="space-y-4">
@@ -515,7 +515,7 @@ export default function Dashboard() {
                 >
                   <div className="flex justify-between items-start mb-3">
                     <div>
-                      <p className="font-semibold">{account.type === 'checking' ? 'Conta Corrente' : 'Poupança'}</p>
+                      <p className="font-semibold">{account.type === 'checking' ? 'Checking Account' : 'Savings'}</p>
                       <div className="flex items-center gap-2 mt-1">
                         <p className="text-sm text-gray-400">{account.accountNumber || '12345-6'}</p>
                         <motion.button
@@ -544,14 +544,14 @@ export default function Dashboard() {
               )) : (
                 <div className="text-center py-8">
                   <Wallet className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                  <p className="text-gray-400 mb-4">Nenhuma conta encontrada</p>
+                  <p className="text-gray-400 mb-4">No accounts found</p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleCreateAccount}
                     className="bg-primary hover:bg-indigo-600 rounded-lg px-6 py-2 font-semibold transition"
                   >
-                    Criar primeira conta
+                    Create first account
                   </motion.button>
                 </div>
               )}
@@ -578,27 +578,27 @@ export default function Dashboard() {
               >
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                   <Bell className="w-5 h-5 text-yellow-400" />
-                  Notificações
+                  Notifications
                 </h3>
                 <div className="space-y-3">
                   <div className="bg-dark-light rounded-lg p-3">
-                    <p className="font-semibold text-sm">Nova transação</p>
-                    <p className="text-xs text-gray-400">Recebimento de $2,500 - Salário</p>
+                    <p className="font-semibold text-sm">New transaction</p>
+                    <p className="text-xs text-gray-400">Received $2,500 - Salary</p>
                   </div>
                   <div className="bg-dark-light rounded-lg p-3">
-                    <p className="font-semibold text-sm">Cartão criado</p>
-                    <p className="text-xs text-gray-400">Seu novo cartão virtual está pronto</p>
+                    <p className="font-semibold text-sm">Card created</p>
+                    <p className="text-xs text-gray-400">Your new virtual card is ready</p>
                   </div>
                   <div className="bg-dark-light rounded-lg p-3">
-                    <p className="font-semibold text-sm">Meta atingida</p>
-                    <p className="text-xs text-gray-400">Parabéns! Você economizou $2,210</p>
+                    <p className="font-semibold text-sm">Goal achieved</p>
+                    <p className="text-xs text-gray-400">Congratulations! You saved $2,210</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowNotifications(false)}
                   className="w-full mt-4 bg-primary hover:bg-indigo-600 rounded-lg py-2 font-semibold transition"
                 >
-                  Fechar
+                  Close
                 </button>
               </motion.div>
             </motion.div>
@@ -624,36 +624,36 @@ export default function Dashboard() {
               >
                 <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                   <Settings className="w-5 h-5 text-blue-400" />
-                  Configurações
+                  Settings
                 </h3>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span>Notificações Push</span>
+                    <span>Push Notifications</span>
                     <button className="bg-primary rounded-full w-12 h-6 flex items-center px-1">
                       <div className="bg-white w-4 h-4 rounded-full ml-auto"></div>
                     </button>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span>Biometria</span>
+                    <span>Biometrics</span>
                     <button className="bg-gray-600 rounded-full w-12 h-6 flex items-center px-1">
                       <div className="bg-white w-4 h-4 rounded-full"></div>
                     </button>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span>Modo Escuro</span>
+                    <span>Dark Mode</span>
                     <button className="bg-primary rounded-full w-12 h-6 flex items-center px-1">
                       <div className="bg-white w-4 h-4 rounded-full ml-auto"></div>
                     </button>
                   </div>
                   <div className="border-t border-gray-700 pt-4">
-                    <button className="text-red-400 hover:underline text-sm">Excluir conta</button>
+                    <button className="text-red-400 hover:underline text-sm">Delete account</button>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowSettings(false)}
                   className="w-full mt-4 bg-primary hover:bg-indigo-600 rounded-lg py-2 font-semibold transition"
                 >
-                  Fechar
+                  Close
                 </button>
               </motion.div>
             </motion.div>

@@ -62,7 +62,10 @@ export default function CryptoWidget() {
         ))}
       </div>
 
-      <button className="w-full mt-4 bg-orange-600 hover:bg-orange-700 rounded-xl py-2 text-sm font-semibold transition">
+      <button 
+        onClick={() => alert('Redirecionando para exchange de crypto...')}
+        className="w-full mt-4 bg-orange-600 hover:bg-orange-700 rounded-xl py-2 text-sm font-semibold transition"
+      >
         Comprar Crypto
       </button>
     </div>

@@ -1,149 +1,149 @@
-# BaaS Ultra - Frontend Revolucionário 🚀
+# BaaS Ultra - Revolutionary Frontend 🚀
 
-## ✨ NOVO: Ultra Responsivo e 100% Funcional!
+## ✨ NEW: Ultra Responsive and 100% Functional!
 
-### 🎯 Status Atual
-- ✅ **100% Funcional** - Todas as features implementadas
-- ✅ **Mock API** - Funciona sem backend
-- ✅ **Persistência** - Dados salvos localmente
-- ✅ **Responsivo** - Mobile-first design
-- ✅ **Animações Premium** - Framer Motion
+### 🎯 Current Status
+- ✅ **100% Functional** - All features implemented
+- ✅ **Mock API** - Works without backend
+- ✅ **Persistence** - Data saved locally
+- ✅ **Responsive** - Mobile-first design
+- ✅ **Premium Animations** - Framer Motion
 
-### 🔐 Login Demo
+### 🔐 Demo Login
 ```
 Email: admin@baas.com
-Senha: 123456
+Password: 123456
 ```
 
-### 📱 Features Ultra Modernas
+### 📱 Ultra Modern Features
 
-#### 🎨 Design Premium
-- **Glassmorphism** com blur 24px
-- **Gradientes animados** no background
-- **Partículas flutuantes** interativas
-- **Micro-interações** em todos elementos
-- **Dark mode** profissional
+#### 🎨 Premium Design
+- **Glassmorphism** with 24px blur
+- **Animated gradients** in background
+- **Floating particles** interactive
+- **Micro-interactions** on all elements
+- **Professional dark mode**
 
-#### ⚡ Dashboard Inteligente
-- **4 Cards estatísticas** com hover effects
-- **Gráfico duplo** - Receita/Gastos + Pizza categorias
-- **Transações recentes** com ícones contextuais
-- **Contas premium** com gradientes e copy button
-- **Ações rápidas** - Criar conta/cartão instantâneo
+#### ⚡ Intelligent Dashboard
+- **4 Statistics cards** with hover effects
+- **Dual chart** - Revenue/Expenses + Category pie
+- **Recent transactions** with contextual icons
+- **Premium accounts** with gradients and copy button
+- **Quick actions** - Create account/card instantly
 
-#### 🔒 Autenticação Avançada
-- **Login animado** com campos focus
-- **Registro completo** com validação
-- **Persistência Zustand** com localStorage
-- **Demo rápido** para testes
+#### 🔒 Advanced Authentication
+- **Animated login** with focus fields
+- **Complete registration** with validation
+- **Zustand persistence** with localStorage
+- **Quick demo** for testing
 
-### 🚀 Instalação e Uso
+### 🚀 Installation and Usage
 
 ```bash
-# Instalar dependências
+# Install dependencies
 npm install
 
-# Desenvolvimento
+# Development
 npm run dev
 
-# Build produção
+# Production build
 npm run build
 
 # Preview build
 npm run preview
 ```
 
-### 📦 Tecnologias
+### 📦 Technologies
 
 - **React 18** - Concurrent features
-- **Vite** - Build ultra rápido
-- **Framer Motion** - Animações premium
-- **Tailwind CSS** - Styling moderno
+- **Vite** - Ultra fast build
+- **Framer Motion** - Premium animations
+- **Tailwind CSS** - Modern styling
 - **Zustand** - State management
-- **Recharts** - Gráficos interativos
-- **Lucide React** - Ícones modernos
+- **Recharts** - Interactive charts
+- **Lucide React** - Modern icons
 
-### 🎯 Estrutura
+### 🎯 Structure
 
 ```
 src/
 ├── components/
-│   ├── Dashboard.jsx     # Dashboard principal
-│   ├── Login.jsx         # Login animado
-│   ├── Register.jsx      # Registro completo
+│   ├── Dashboard.jsx     # Main dashboard
+│   ├── Login.jsx         # Animated login
+│   ├── Register.jsx      # Complete registration
 │   └── LoadingSpinner.jsx
 ├── services/
-│   ├── api.js           # API real/mock
-│   └── mockApi.js       # Dados mock
+│   ├── api.js           # Real/mock API
+│   └── mockApi.js       # Mock data
 ├── store/
 │   └── useStore.js      # Zustand store
-├── App.jsx              # App principal
-└── index.css            # Estilos globais
+├── App.jsx              # Main app
+└── index.css            # Global styles
 ```
 
-### 🔧 Configuração
+### 🔧 Configuration
 
 #### Vite Config
-- **Proxy** para backend (porta 8080)
-- **HMR** configurado
-- **Build otimizado**
+- **Proxy** for backend (port 8080)
+- **HMR** configured
+- **Optimized build**
 
 #### Tailwind
-- **Classes customizadas** (.glass, .glow)
-- **Cores personalizadas** (primary, dark-light)
-- **Animações** (float, glow, shimmer)
+- **Custom classes** (.glass, .glow)
+- **Custom colors** (primary, dark-light)
+- **Animations** (float, glow, shimmer)
 
 ### 📊 Performance
 
 - **Lighthouse Score**: 95+
 - **FCP**: < 1s
 - **TTI**: < 2s
-- **Bundle size**: Otimizado
-- **Lazy loading**: Componentes
+- **Bundle size**: Optimized
+- **Lazy loading**: Components
 
 ### 🎨 Design System
 
-#### Cores
+#### Colors
 - **Primary**: #6366f1 (Indigo)
 - **Dark**: #0f172a (Slate 900)
 - **Dark Light**: #334155 (Slate 700)
 
-#### Animações
+#### Animations
 - **Hover effects**: Scale 1.05
 - **Tap effects**: Scale 0.95
 - **Transitions**: 200ms ease
-- **Staggered**: Delay incremental
+- **Staggered**: Incremental delay
 
-### 🔄 Estado Global
+### 🔄 Global State
 
 ```javascript
 // Zustand Store
 {
-  user: null,           // Usuário logado
+  user: null,           // Logged user
   token: null,          // JWT token
-  accounts: [],         // Contas bancárias
-  cards: [],           // Cartões
-  transactions: []     // Transações
+  accounts: [],         // Bank accounts
+  cards: [],           // Cards
+  transactions: []     // Transactions
 }
 ```
 
-### 🎯 Funcionalidades
+### 🎯 Features
 
-#### ✅ Implementadas
-- [x] Login/Registro animado
-- [x] Dashboard completo
-- [x] Criação conta/cartão
-- [x] Gráficos interativos
-- [x] Transações mock
-- [x] Persistência dados
-- [x] Responsividade total
+#### ✅ Implemented
+- [x] Animated login/registration
+- [x] Complete dashboard
+- [x] Account/card creation
+- [x] Interactive charts
+- [x] Mock transactions
+- [x] Data persistence
+- [x] Total responsiveness
 
-#### 🔮 Futuras
-- [ ] Transferências reais
-- [ ] Notificações push
-- [ ] Chat IA financeira
-- [ ] Biometria
-- [ ] PWA offline
+#### 🔮 Future
+- [ ] Real transfers
+- [ ] Push notifications
+- [ ] Financial AI chat
+- [ ] Biometrics
+- [ ] Offline PWA
 
 ### 🚀 Deploy
 
@@ -165,14 +165,14 @@ docker build -t baas-frontend .
 docker run -p 3001:3001 baas-frontend
 ```
 
-### 🎯 Diferencial Competitivo
+### 🎯 Competitive Advantage
 
-1. **Design Futurista** - Glassmorphism + animações
+1. **Futuristic Design** - Glassmorphism + animations
 2. **Performance** - Vite + React 18
-3. **UX Premium** - Micro-interações + feedback
-4. **Responsivo** - Mobile-first + touch optimized
-5. **Funcional** - 100% operacional sem backend
+3. **Premium UX** - Micro-interactions + feedback
+4. **Responsive** - Mobile-first + touch optimized
+5. **Functional** - 100% operational without backend
 
 ---
 
-**BaaS Ultra Frontend** - O futuro do banking digital 🚀✨
+**BaaS Ultra Frontend** - The future of digital banking 🚀✨

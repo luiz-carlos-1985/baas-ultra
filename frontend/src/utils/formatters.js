@@ -29,3 +29,17 @@ export const validateEmail = (email) => {
 export const validatePassword = (password) => {
   return password.length >= 6
 }
+
+export const getTransactionIcon = (category) => {
+  const icons = {
+    work: '💼',
+    food: '🍕',
+    transport: '🚗',
+    entertainment: '🎬',
+    shopping: '🛒',
+    investment: '📈',
+    transfer: '💸',
+    pix: '⚡'
+  }
+  return icons[category] || '💳'
+}

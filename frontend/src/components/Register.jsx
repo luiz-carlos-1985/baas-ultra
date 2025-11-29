@@ -21,10 +21,10 @@ export default function Register({ onSwitch }) {
   const validateForm = () => {
     const newErrors = {}
     
-    if (!formData.name.trim()) newErrors.name = 'Nome é obrigatório'
-    if (!validateEmail(formData.email)) newErrors.email = 'Email inválido'
-    if (!validatePassword(formData.password)) newErrors.password = 'Senha deve ter pelo menos 6 caracteres'
-    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Senhas não coincidem'
+    if (!formData.name.trim()) newErrors.name = 'Name is required'
+    if (!validateEmail(formData.email)) newErrors.email = 'Invalid email'
+    if (!validatePassword(formData.password)) newErrors.password = 'Password must be at least 6 characters'
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match'
     
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -46,7 +46,7 @@ export default function Register({ onSwitch }) {
       }
     } catch (error) {
       console.error('Register error:', error)
-      setErrors({ general: error.message || 'Erro ao criar conta' })
+      setErrors({ general: error.message || 'Error creating account' })
     } finally {
       setLoading(false)
       setGlobalLoading(false)
@@ -106,7 +106,7 @@ export default function Register({ onSwitch }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Criar conta
+              Create account
             </motion.h1>
             <motion.p 
               className="text-sm sm:text-base text-gray-400 flex items-center justify-center gap-2"
@@ -115,7 +115,7 @@ export default function Register({ onSwitch }) {
               transition={{ delay: 0.3 }}
             >
               <Shield className="w-4 h-4" />
-              Junte-se ao futuro
+              Join the future
               <Zap className="w-4 h-4 text-yellow-400" />
             </motion.p>
           </div>
@@ -137,7 +137,7 @@ export default function Register({ onSwitch }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <label className="block text-sm mb-2 font-medium">Nome</label>
+              <label className="block text-sm mb-2 font-medium">Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                 <motion.input
@@ -153,7 +153,7 @@ export default function Register({ onSwitch }) {
                         ? 'border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20' 
                         : 'border-gray-700 hover:border-gray-600'
                   }`}
-                  placeholder="Seu nome completo"
+                  placeholder="Your full name"
                   required
                   animate={{ scale: focusedField === 'name' ? 1.02 : 1 }}
                   transition={{ duration: 0.2 }}
@@ -185,7 +185,7 @@ export default function Register({ onSwitch }) {
                         ? 'border-primary ring-2 ring-primary/20 shadow-lg shadow-primary/20' 
                         : 'border-gray-700 hover:border-gray-600'
                   }`}
-                  placeholder="seu@email.com"
+                  placeholder="your@email.com"
                   required
                   animate={{ scale: focusedField === 'email' ? 1.02 : 1 }}
                   transition={{ duration: 0.2 }}
@@ -201,7 +201,7 @@ export default function Register({ onSwitch }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <label className="block text-sm mb-2 font-medium">Senha</label>
+              <label className="block text-sm mb-2 font-medium">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                 <motion.input
@@ -247,7 +247,7 @@ export default function Register({ onSwitch }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <label className="block text-sm mb-2 font-medium">Confirmar Senha</label>
+              <label className="block text-sm mb-2 font-medium">Confirm Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none z-10" />
                 <motion.input
@@ -298,7 +298,7 @@ export default function Register({ onSwitch }) {
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                       className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
                     />
-                    Criando conta...
+                    Creating account...
                   </motion.div>
                 ) : (
                   <motion.div
@@ -308,7 +308,7 @@ export default function Register({ onSwitch }) {
                     exit={{ opacity: 0 }}
                     className="flex items-center gap-2"
                   >
-                    Criar conta
+                    Create account
                     <ArrowRight className="w-5 h-5" />
                   </motion.div>
                 )}
@@ -322,14 +322,14 @@ export default function Register({ onSwitch }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            Já tem conta?{' '}
+            Already have an account?{' '}
             <motion.button 
               onClick={onSwitch} 
               className="text-primary hover:underline font-medium touch-manipulation"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Fazer login
+              Sign in
             </motion.button>
           </motion.p>
         </div>

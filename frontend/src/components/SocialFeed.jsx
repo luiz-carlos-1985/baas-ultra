@@ -46,7 +46,10 @@ export default function SocialFeed() {
           <Users className="w-6 h-6 text-blue-400" />
           Social Banking
         </h2>
-        <button className="bg-primary rounded-xl px-4 py-2 text-sm font-semibold">
+        <button 
+          onClick={() => alert('Compartilhar conquista...')}
+          className="bg-primary rounded-xl px-4 py-2 text-sm font-semibold"
+        >
           + Compartilhar
         </button>
       </div>
@@ -113,15 +116,24 @@ export default function SocialFeed() {
             <p className="text-sm mb-4">{post.content}</p>
 
             <div className="flex items-center gap-6 text-gray-400">
-              <button className="flex items-center gap-2 hover:text-red-400 transition">
+              <button 
+                onClick={() => alert('Curtiu o post!')}
+                className="flex items-center gap-2 hover:text-red-400 transition"
+              >
                 <Heart className="w-4 h-4" />
                 <span className="text-xs">{post.likes}</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-blue-400 transition">
+              <button 
+                onClick={() => alert('Abrindo comentários...')}
+                className="flex items-center gap-2 hover:text-blue-400 transition"
+              >
                 <MessageCircle className="w-4 h-4" />
                 <span className="text-xs">{post.comments}</span>
               </button>
-              <button className="flex items-center gap-2 hover:text-green-400 transition">
+              <button 
+                onClick={() => alert('Compartilhando post...')}
+                className="flex items-center gap-2 hover:text-green-400 transition"
+              >
                 <Share className="w-4 h-4" />
               </button>
             </div>

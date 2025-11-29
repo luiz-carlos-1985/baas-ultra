@@ -110,7 +110,10 @@ export default function MarketplaceWidget() {
           <p className="text-sm text-white/80 mb-4">
             Ganhe 2x mais cashback em todas as compras até domingo
           </p>
-          <button className="bg-white text-green-600 px-6 py-2 rounded-xl font-semibold text-sm hover:bg-gray-100 transition">
+          <button 
+            onClick={() => alert('Cashback duplo ativado!')}
+            className="bg-white text-green-600 px-6 py-2 rounded-xl font-semibold text-sm hover:bg-gray-100 transition"
+          >
             Ativar Agora
           </button>
         </div>
@@ -151,7 +154,10 @@ export default function MarketplaceWidget() {
               </div>
             </div>
             
-            <button className="w-full mt-4 bg-primary hover:bg-indigo-600 rounded-xl py-2 text-sm font-semibold transition flex items-center justify-center gap-2">
+            <button 
+              onClick={() => alert(`Usando oferta: ${deal.title}`)}
+              className="w-full mt-4 bg-primary hover:bg-indigo-600 rounded-xl py-2 text-sm font-semibold transition flex items-center justify-center gap-2"
+            >
               <Truck className="w-4 h-4" />
               Usar Oferta
             </button>
@@ -173,6 +179,7 @@ export default function MarketplaceWidget() {
               key={index}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => alert(`Pagando ${service.name} com ${service.cashback} cashback`)}
               className="bg-dark-light rounded-xl p-4 text-center hover:bg-dark-light/80 transition"
             >
               <div className="text-2xl mb-2">{service.icon}</div>
