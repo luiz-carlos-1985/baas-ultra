@@ -175,6 +175,30 @@ services:
     environment:
       - PORT=8089
 
+  ai-orchestrator:
+    build: ./services/ai-orchestrator
+    ports:
+      - "8090:8090"
+    environment:
+      - PORT=8090
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+  quantum-security:
+    build: ./services/quantum-security
+    ports:
+      - "8091:8091"
+    environment:
+      - PORT=8091
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3001:3001"
+    environment:
+      - VITE_API_URL=http://localhost:8080/api/v1
+    depends_on:
+      - api-gateway
+
 volumes:
   postgres_data:
   redis_data:

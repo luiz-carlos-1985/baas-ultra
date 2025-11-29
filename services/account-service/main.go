@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -41,6 +42,7 @@ type Transaction struct {
 var db *gorm.DB
 
 func main() {
+	godotenv.Load()
 	dbURL := getEnv("DATABASE_URL", "postgres://postgres:postgres@localhost:5432/baas?sslmode=disable")
 	port := getEnv("PORT", "8082")
 
