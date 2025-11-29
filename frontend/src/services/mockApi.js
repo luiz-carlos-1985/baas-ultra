@@ -52,7 +52,7 @@ export const mockApi = {
 
   async getAccounts(token) {
     await delay(200)
-    return mockAccounts
+    return { accounts: mockAccounts }
   },
 
   async createCard(token, data) {
